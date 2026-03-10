@@ -16,14 +16,13 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-green-100">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-cream-50/90 backdrop-blur-md border-b border-sunny-200/60">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-2">
-            <span className="text-2xl">🥗</span>
-            <span className="text-xl font-extrabold text-green-700">
-              Little<span className="text-orange-500">Lunch</span>
+          <a href="#" className="flex items-center gap-1.5">
+            <span className="font-[family-name:var(--font-pacifico)] text-2xl text-brown-600">
+              Little Lunch
             </span>
           </a>
 
@@ -33,7 +32,7 @@ export default function Header() {
               <a
                 key={link.href}
                 href={link.href}
-                className="text-sm font-semibold text-stone-600 hover:text-green-600 transition-colors"
+                className="text-sm font-semibold text-brown-400 hover:text-brown-600 transition-colors"
               >
                 {link.label}
               </a>
@@ -43,14 +42,14 @@ export default function Header() {
           {/* Desktop CTA */}
           <a
             href="#planos"
-            className="hidden md:inline-flex items-center rounded-full bg-green-600 px-5 py-2.5 text-sm font-bold text-white shadow-md hover:bg-green-700 transition-colors"
+            className="hidden md:inline-flex items-center rounded-full bg-sunny-400 px-5 py-2.5 text-sm font-bold text-brown-700 shadow-md shadow-sunny-400/25 hover:bg-sunny-500 transition-colors"
           >
             Começar Agora
           </a>
 
           {/* Mobile Toggle */}
           <button
-            className="md:hidden text-stone-700"
+            className="md:hidden text-brown-600"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Menu"
           >
@@ -61,14 +60,14 @@ export default function Header() {
 
       {/* Mobile Menu */}
       {mobileOpen && (
-        <div className="md:hidden bg-white border-t border-green-100 px-4 pb-4">
+        <div className="md:hidden bg-cream-50 border-t border-sunny-200/60 px-4 pb-4">
           <nav className="flex flex-col gap-3 pt-3">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileOpen(false)}
-                className="text-sm font-semibold text-stone-600 hover:text-green-600 transition-colors py-2"
+                className="text-sm font-semibold text-brown-400 hover:text-brown-600 transition-colors py-2"
               >
                 {link.label}
               </a>
@@ -76,7 +75,7 @@ export default function Header() {
             <a
               href="#planos"
               onClick={() => setMobileOpen(false)}
-              className="mt-2 inline-flex items-center justify-center rounded-full bg-green-600 px-5 py-2.5 text-sm font-bold text-white shadow-md hover:bg-green-700 transition-colors"
+              className="mt-2 inline-flex items-center justify-center rounded-full bg-sunny-400 px-5 py-2.5 text-sm font-bold text-brown-700 shadow-md shadow-sunny-400/25 hover:bg-sunny-500 transition-colors"
             >
               Começar Agora
             </a>
@@ -86,4 +85,3 @@ export default function Header() {
     </header>
   );
 }
-

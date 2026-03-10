@@ -23,15 +23,17 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <section className="py-20 sm:py-28 bg-gradient-to-b from-white to-orange-50/30">
+    <section className="py-20 sm:py-28 bg-gradient-to-b from-white to-coral-50/30">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto">
-          <span className="inline-block text-sm font-bold text-orange-500 uppercase tracking-wider mb-3">
+          <span className="inline-block text-sm font-bold text-coral-500 uppercase tracking-wider mb-3">
             Depoimentos
           </span>
-          <h2 className="text-3xl font-extrabold text-stone-900 sm:text-4xl">
+          <h2 className="text-3xl font-extrabold text-brown-700 sm:text-4xl">
             O que as famílias dizem sobre o{" "}
-            <span className="text-green-600">Little Lunch</span>
+            <span className="font-[family-name:var(--font-pacifico)] text-brown-600">
+              Little Lunch
+            </span>
           </h2>
         </div>
 
@@ -39,29 +41,29 @@ export default function Testimonials() {
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
-              className="rounded-2xl bg-white border border-stone-100 p-8 shadow-sm hover:shadow-md transition-shadow"
+              className="rounded-2xl bg-white border border-cream-300 p-8 shadow-sm hover:shadow-md transition-shadow"
             >
               <div className="flex gap-1">
                 {Array.from({ length: testimonial.rating }).map((_, i) => (
                   <Star
                     key={i}
                     size={18}
-                    className="text-yellow-400 fill-yellow-400"
+                    className="text-sunny-400 fill-sunny-400"
                   />
                 ))}
               </div>
-              <p className="mt-4 text-base leading-relaxed text-stone-600 italic">
+              <p className="mt-4 text-base leading-relaxed text-brown-500 italic">
                 &ldquo;{testimonial.text}&rdquo;
               </p>
               <div className="mt-6 flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-green-100 text-sm font-bold text-green-700">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-sunny-200 text-sm font-bold text-brown-600">
                   {testimonial.name.charAt(0)}
                 </div>
                 <div>
-                  <p className="text-sm font-bold text-stone-800">
+                  <p className="text-sm font-bold text-brown-600">
                     {testimonial.name}
                   </p>
-                  <p className="text-xs text-stone-400">{testimonial.role}</p>
+                  <p className="text-xs text-brown-300">{testimonial.role}</p>
                 </div>
               </div>
             </div>
@@ -71,4 +73,3 @@ export default function Testimonials() {
     </section>
   );
 }
-

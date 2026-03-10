@@ -6,7 +6,6 @@ import {
   X,
   Send,
   ChevronRight,
-  Leaf,
   ArrowLeft,
 } from "lucide-react";
 
@@ -179,22 +178,86 @@ function getBotResponse(action: string): Message {
 /* ───────── simple keyword-based intent detection ───────── */
 
 function detectIntent(text: string): string {
-  const lower = text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  const lower = text
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
 
   const intents: { keywords: string[]; action: string }[] = [
-    { keywords: ["plano", "preco", "valor", "quanto custa", "assinatura", "assinar", "mensalidade"], action: "plans" },
-    { keywords: ["qual plano", "melhor plano", "recomend", "indicar", "sugerir"], action: "recommend" },
+    {
+      keywords: [
+        "plano",
+        "preco",
+        "valor",
+        "quanto custa",
+        "assinatura",
+        "assinar",
+        "mensalidade",
+      ],
+      action: "plans",
+    },
+    {
+      keywords: ["qual plano", "melhor plano", "recomend", "indicar", "sugerir"],
+      action: "recommend",
+    },
     { keywords: ["mensal"], action: "choose_monthly" },
     { keywords: ["trimestral"], action: "choose_quarterly" },
     { keywords: ["anual"], action: "choose_annual" },
-    { keywords: ["entrega", "frete", "envio", "receber", "chega"], action: "delivery" },
-    { keywords: ["idade", "anos", "bebe", "crianca", "faixa etaria", "escolar"], action: "age" },
-    { keywords: ["alergia", "intolerancia", "restricao", "gluten", "lactose", "leite"], action: "allergies" },
-    { keywords: ["ingrediente", "natural", "organico", "qualidade", "ultraprocessado", "conservante"], action: "ingredients" },
-    { keywords: ["beneficio", "vantagem", "diferencial", "por que"], action: "benefits" },
-    { keywords: ["cancelar", "cancelamento", "pausar", "desistir"], action: "cancel" },
-    { keywords: ["o que e", "sobre", "como funciona", "little lunch"], action: "about" },
-    { keywords: ["atendente", "humano", "pessoa", "falar com", "contato", "whatsapp", "telefone", "email"], action: "human" },
+    {
+      keywords: ["entrega", "frete", "envio", "receber", "chega"],
+      action: "delivery",
+    },
+    {
+      keywords: ["idade", "anos", "bebe", "crianca", "faixa etaria", "escolar"],
+      action: "age",
+    },
+    {
+      keywords: [
+        "alergia",
+        "intolerancia",
+        "restricao",
+        "gluten",
+        "lactose",
+        "leite",
+      ],
+      action: "allergies",
+    },
+    {
+      keywords: [
+        "ingrediente",
+        "natural",
+        "organico",
+        "qualidade",
+        "ultraprocessado",
+        "conservante",
+      ],
+      action: "ingredients",
+    },
+    {
+      keywords: ["beneficio", "vantagem", "diferencial", "por que"],
+      action: "benefits",
+    },
+    {
+      keywords: ["cancelar", "cancelamento", "pausar", "desistir"],
+      action: "cancel",
+    },
+    {
+      keywords: ["o que e", "sobre", "como funciona", "little lunch"],
+      action: "about",
+    },
+    {
+      keywords: [
+        "atendente",
+        "humano",
+        "pessoa",
+        "falar com",
+        "contato",
+        "whatsapp",
+        "telefone",
+        "email",
+      ],
+      action: "human",
+    },
   ];
 
   for (const intent of intents) {
@@ -254,7 +317,6 @@ export default function ChatBot() {
   }
 
   function handleOptionClick(action: string, label: string) {
-    // Navigate actions
     if (action === "go_plans") {
       window.location.hash = "#planos";
       setOpen(false);
@@ -283,10 +345,8 @@ export default function ChatBot() {
       return;
     }
 
-    // Add user message
     const userMsg: Message = { id: Date.now(), from: "user", text: label };
     setMessages((prev) => [...prev, userMsg]);
-
     addBotMessage(action);
   }
 
@@ -320,22 +380,22 @@ export default function ChatBot() {
         onClick={() => setOpen(!open)}
         className={`fixed bottom-5 right-5 z-50 flex h-14 w-14 items-center justify-center rounded-full shadow-lg transition-all duration-300 sm:h-16 sm:w-16 ${
           open
-            ? "bg-stone-700 hover:bg-stone-800 rotate-0"
-            : "bg-green-600 hover:bg-green-700 animate-bounce-slow"
+            ? "bg-brown-600 hover:bg-brown-700 rotate-0"
+            : "bg-sunny-400 hover:bg-sunny-500 animate-bounce-slow"
         }`}
         aria-label={open ? "Fechar chat" : "Abrir chat"}
       >
         {open ? (
           <X size={24} className="text-white" />
         ) : (
-          <MessageCircle size={24} className="text-white" />
+          <MessageCircle size={24} className="text-brown-700" />
         )}
       </button>
 
       {/* Badge "Precisa de ajuda?" */}
       {!open && (
         <div className="fixed bottom-20 right-5 z-50 animate-fade-in sm:bottom-[5.5rem]">
-          <div className="rounded-full bg-white px-4 py-2 text-xs font-semibold text-stone-700 shadow-md border border-stone-100">
+          <div className="rounded-full bg-white px-4 py-2 text-xs font-semibold text-brown-600 shadow-md border border-sunny-200">
             Precisa de ajuda? 💬
           </div>
         </div>
@@ -344,16 +404,18 @@ export default function ChatBot() {
       {/* ────────── Chat Window ────────── */}
       {open && (
         <div className="fixed inset-0 z-50 flex items-end justify-end sm:inset-auto sm:bottom-24 sm:right-5">
-          <div className="flex h-full w-full flex-col bg-white shadow-2xl sm:h-[min(580px,80vh)] sm:w-[400px] sm:rounded-2xl sm:border sm:border-stone-200 overflow-hidden">
+          <div className="flex h-full w-full flex-col bg-white shadow-2xl sm:h-[min(580px,80vh)] sm:w-[400px] sm:rounded-2xl sm:border sm:border-cream-300 overflow-hidden">
             {/* Header */}
-            <div className="flex items-center justify-between bg-green-600 px-4 py-3 sm:rounded-t-2xl">
+            <div className="flex items-center justify-between bg-brown-600 px-4 py-3 sm:rounded-t-2xl">
               <div className="flex items-center gap-3">
-                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-white/20">
-                  <Leaf size={18} className="text-white" />
+                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-sunny-400/30">
+                  <span className="font-[family-name:var(--font-pacifico)] text-sm text-white">
+                    L
+                  </span>
                 </div>
                 <div>
                   <p className="text-sm font-bold text-white">Lumi</p>
-                  <p className="text-xs text-green-200">
+                  <p className="text-xs text-sunny-300">
                     Assistente Little Lunch
                   </p>
                 </div>
@@ -361,14 +423,14 @@ export default function ChatBot() {
               <div className="flex items-center gap-2">
                 <button
                   onClick={handleReset}
-                  className="rounded-lg p-1.5 text-green-200 hover:bg-white/15 hover:text-white transition-colors"
+                  className="rounded-lg p-1.5 text-brown-200 hover:bg-white/15 hover:text-white transition-colors"
                   title="Recomeçar conversa"
                 >
                   <ArrowLeft size={18} />
                 </button>
                 <button
                   onClick={() => setOpen(false)}
-                  className="rounded-lg p-1.5 text-green-200 hover:bg-white/15 hover:text-white transition-colors sm:hidden"
+                  className="rounded-lg p-1.5 text-brown-200 hover:bg-white/15 hover:text-white transition-colors sm:hidden"
                 >
                   <X size={18} />
                 </button>
@@ -376,7 +438,7 @@ export default function ChatBot() {
             </div>
 
             {/* Messages */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-stone-50">
+            <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-cream-100">
               {messages.map((msg) => (
                 <div key={msg.id}>
                   {/* Bubble */}
@@ -386,8 +448,8 @@ export default function ChatBot() {
                     <div
                       className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed whitespace-pre-line ${
                         msg.from === "user"
-                          ? "bg-green-600 text-white rounded-br-md"
-                          : "bg-white text-stone-700 border border-stone-100 shadow-sm rounded-bl-md"
+                          ? "bg-sunny-400 text-brown-700 rounded-br-md"
+                          : "bg-white text-brown-600 border border-cream-300 shadow-sm rounded-bl-md"
                       }`}
                     >
                       {msg.text.split("\n").map((line, i) => (
@@ -408,9 +470,9 @@ export default function ChatBot() {
                           onClick={() =>
                             handleOptionClick(opt.action, opt.label)
                           }
-                          className="inline-flex items-center gap-1.5 rounded-full border border-green-200 bg-white px-3.5 py-2 text-xs font-semibold text-green-700 hover:bg-green-50 hover:border-green-300 transition-all active:scale-95"
+                          className="inline-flex items-center gap-1.5 rounded-full border border-sunny-300 bg-white px-3.5 py-2 text-xs font-semibold text-brown-600 hover:bg-sunny-50 hover:border-sunny-400 transition-all active:scale-95"
                         >
-                          <ChevronRight size={12} />
+                          <ChevronRight size={12} className="text-sunny-600" />
                           {opt.label}
                         </button>
                       ))}
@@ -422,11 +484,11 @@ export default function ChatBot() {
               {/* Typing indicator */}
               {typing && (
                 <div className="flex justify-start">
-                  <div className="rounded-2xl rounded-bl-md bg-white border border-stone-100 shadow-sm px-4 py-3">
+                  <div className="rounded-2xl rounded-bl-md bg-white border border-cream-300 shadow-sm px-4 py-3">
                     <div className="flex gap-1.5">
-                      <span className="h-2 w-2 rounded-full bg-stone-300 animate-bounce [animation-delay:0ms]" />
-                      <span className="h-2 w-2 rounded-full bg-stone-300 animate-bounce [animation-delay:150ms]" />
-                      <span className="h-2 w-2 rounded-full bg-stone-300 animate-bounce [animation-delay:300ms]" />
+                      <span className="h-2 w-2 rounded-full bg-sunny-400 animate-bounce [animation-delay:0ms]" />
+                      <span className="h-2 w-2 rounded-full bg-sunny-400 animate-bounce [animation-delay:150ms]" />
+                      <span className="h-2 w-2 rounded-full bg-sunny-400 animate-bounce [animation-delay:300ms]" />
                     </div>
                   </div>
                 </div>
@@ -436,7 +498,7 @@ export default function ChatBot() {
             </div>
 
             {/* Input */}
-            <div className="border-t border-stone-100 bg-white p-3">
+            <div className="border-t border-cream-300 bg-white p-3">
               <div className="flex items-center gap-2">
                 <input
                   ref={inputRef}
@@ -445,17 +507,17 @@ export default function ChatBot() {
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={handleKeyDown}
                   placeholder="Digite sua dúvida..."
-                  className="flex-1 rounded-xl border border-stone-200 bg-stone-50 px-4 py-2.5 text-sm text-stone-800 placeholder:text-stone-400 outline-none focus:border-green-400 focus:ring-2 focus:ring-green-100 transition-all"
+                  className="flex-1 rounded-xl border border-cream-300 bg-cream-100 px-4 py-2.5 text-sm text-brown-700 placeholder:text-brown-300 outline-none focus:border-sunny-400 focus:ring-2 focus:ring-sunny-100 transition-all"
                 />
                 <button
                   onClick={handleSend}
                   disabled={!input.trim()}
-                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-green-600 text-white shadow-sm hover:bg-green-700 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-sunny-400 text-brown-700 shadow-sm hover:bg-sunny-500 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
                 >
                   <Send size={16} />
                 </button>
               </div>
-              <p className="mt-2 text-center text-[10px] text-stone-400">
+              <p className="mt-2 text-center text-[10px] text-brown-300">
                 Assistente automatizada do Little Lunch
               </p>
             </div>
@@ -494,4 +556,3 @@ export default function ChatBot() {
     </>
   );
 }
-

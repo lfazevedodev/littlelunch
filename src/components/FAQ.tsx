@@ -43,13 +43,13 @@ export default function FAQ() {
     <section id="faq" className="py-20 sm:py-28 bg-white">
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         <div className="text-center">
-          <span className="inline-block text-sm font-bold text-green-600 uppercase tracking-wider mb-3">
+          <span className="inline-block text-sm font-bold text-sunny-700 uppercase tracking-wider mb-3">
             Dúvidas Frequentes
           </span>
-          <h2 className="text-3xl font-extrabold text-stone-900 sm:text-4xl">
+          <h2 className="text-3xl font-extrabold text-brown-700 sm:text-4xl">
             Perguntas Frequentes
           </h2>
-          <p className="mt-4 text-lg text-stone-500">
+          <p className="mt-4 text-lg text-brown-400">
             Tire suas dúvidas sobre o Little Lunch
           </p>
         </div>
@@ -58,7 +58,7 @@ export default function FAQ() {
           {faqs.map((faq, index) => (
             <div
               key={index}
-              className="rounded-2xl border border-stone-100 bg-stone-50/50 overflow-hidden transition-all"
+              className="rounded-2xl border border-cream-300 bg-cream-100 overflow-hidden transition-all"
             >
               <button
                 className="flex w-full items-center justify-between p-5 text-left"
@@ -66,19 +66,19 @@ export default function FAQ() {
                   setOpenIndex(openIndex === index ? null : index)
                 }
               >
-                <span className="text-base font-semibold text-stone-800 pr-4">
+                <span className="text-base font-semibold text-brown-600 pr-4">
                   {faq.question}
                 </span>
                 <ChevronDown
                   size={20}
-                  className={`shrink-0 text-stone-400 transition-transform ${
+                  className={`shrink-0 text-brown-300 transition-transform ${
                     openIndex === index ? "rotate-180" : ""
                   }`}
                 />
               </button>
               {openIndex === index && (
                 <div className="px-5 pb-5">
-                  <p className="text-sm leading-relaxed text-stone-500">
+                  <p className="text-sm leading-relaxed text-brown-400">
                     {faq.answer}
                   </p>
                 </div>
@@ -90,4 +90,3 @@ export default function FAQ() {
     </section>
   );
 }
-

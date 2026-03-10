@@ -56,14 +56,14 @@ export default function Plans() {
     <section id="planos" className="py-20 sm:py-28 bg-white">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto">
-          <span className="inline-block text-sm font-bold text-green-600 uppercase tracking-wider mb-3">
+          <span className="inline-block text-sm font-bold text-sunny-700 uppercase tracking-wider mb-3">
             Planos
           </span>
-          <h2 className="text-3xl font-extrabold text-stone-900 sm:text-4xl">
+          <h2 className="text-3xl font-extrabold text-brown-700 sm:text-4xl">
             Escolha o plano ideal para a{" "}
-            <span className="text-green-600">sua família</span>
+            <span className="text-sunny-600">sua família</span>
           </h2>
-          <p className="mt-4 text-lg text-stone-500">
+          <p className="mt-4 text-lg text-brown-400">
             Planos flexíveis pensados para diferentes necessidades. Quanto mais
             longo o plano, maior a economia.
           </p>
@@ -75,13 +75,13 @@ export default function Plans() {
               key={index}
               className={`relative rounded-3xl p-8 transition-all ${
                 plan.highlighted
-                  ? "bg-green-600 text-white shadow-2xl shadow-green-600/25 scale-[1.03] border-2 border-green-500"
-                  : "bg-white border-2 border-stone-100 hover:border-green-200 shadow-sm hover:shadow-md"
+                  ? "bg-brown-600 text-white shadow-2xl shadow-brown-600/25 scale-[1.03] border-2 border-brown-500"
+                  : "bg-white border-2 border-cream-300 hover:border-sunny-300 shadow-sm hover:shadow-md"
               }`}
             >
               {plan.badge && (
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                  <span className="inline-flex items-center gap-1 rounded-full bg-orange-500 px-4 py-1.5 text-xs font-bold text-white shadow-md">
+                  <span className="inline-flex items-center gap-1 rounded-full bg-coral-500 px-4 py-1.5 text-xs font-bold text-white shadow-md">
                     <Star size={14} />
                     {plan.badge}
                   </span>
@@ -89,30 +89,30 @@ export default function Plans() {
               )}
 
               <h3
-                className={`text-lg font-bold ${plan.highlighted ? "text-green-100" : "text-stone-500"}`}
+                className={`text-lg font-bold ${plan.highlighted ? "text-sunny-300" : "text-brown-400"}`}
               >
                 {plan.name}
               </h3>
               <div className="mt-3 flex items-baseline gap-1">
                 <span
-                  className={`text-4xl font-extrabold ${plan.highlighted ? "text-white" : "text-stone-900"}`}
+                  className={`text-4xl font-extrabold ${plan.highlighted ? "text-white" : "text-brown-700"}`}
                 >
                   {plan.price}
                 </span>
                 <span
-                  className={`text-base font-medium ${plan.highlighted ? "text-green-200" : "text-stone-400"}`}
+                  className={`text-base font-medium ${plan.highlighted ? "text-brown-200" : "text-brown-300"}`}
                 >
                   {plan.period}
                 </span>
               </div>
               <p
-                className={`mt-2 text-sm ${plan.highlighted ? "text-green-100" : "text-stone-500"}`}
+                className={`mt-2 text-sm ${plan.highlighted ? "text-brown-200" : "text-brown-400"}`}
               >
                 {plan.description}
               </p>
 
               <hr
-                className={`my-6 ${plan.highlighted ? "border-green-500" : "border-stone-100"}`}
+                className={`my-6 ${plan.highlighted ? "border-brown-500" : "border-cream-300"}`}
               />
 
               <ul className="space-y-3">
@@ -120,11 +120,11 @@ export default function Plans() {
                   <li key={fIndex} className="flex items-start gap-3 text-sm">
                     <Check
                       size={18}
-                      className={`shrink-0 mt-0.5 ${plan.highlighted ? "text-green-200" : "text-green-500"}`}
+                      className={`shrink-0 mt-0.5 ${plan.highlighted ? "text-sunny-400" : "text-leaf-400"}`}
                     />
                     <span
                       className={
-                        plan.highlighted ? "text-white" : "text-stone-600"
+                        plan.highlighted ? "text-white" : "text-brown-500"
                       }
                     >
                       {feature}
@@ -137,8 +137,8 @@ export default function Plans() {
                 href="#"
                 className={`mt-8 block w-full rounded-full py-3.5 text-center text-sm font-bold transition-all ${
                   plan.highlighted
-                    ? "bg-white text-green-700 hover:bg-green-50 shadow-md"
-                    : "bg-green-600 text-white hover:bg-green-700 shadow-md shadow-green-600/20"
+                    ? "bg-sunny-400 text-brown-700 hover:bg-sunny-500 shadow-md"
+                    : "bg-sunny-400 text-brown-700 hover:bg-sunny-500 shadow-md shadow-sunny-400/20"
                 }`}
               >
                 {plan.cta}
@@ -150,4 +150,3 @@ export default function Plans() {
     </section>
   );
 }
-
