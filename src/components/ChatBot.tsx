@@ -40,8 +40,10 @@ const WELCOME_MESSAGE: Message = {
   ],
 };
 
+let messageIdCounter = 1000;
+
 function getBotResponse(action: string): Message {
-  const base = { id: Date.now(), from: "bot" as const };
+  const base = { id: messageIdCounter++, from: "bot" as const };
 
   const responses: Record<string, Omit<Message, "id" | "from">> = {
     about: {
@@ -288,12 +290,17 @@ function formatText(text: string) {
 /* ══════════════════════ COMPONENT ══════════════════════ */
 
 export default function ChatBot() {
+  const [mounted, setMounted] = useState(false);
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([WELCOME_MESSAGE]);
   const [input, setInput] = useState("");
   const [typing, setTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const scrollToBottom = useCallback(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -313,7 +320,7 @@ export default function ChatBot() {
       const response = getBotResponse(action);
       setMessages((prev) => [...prev, response]);
       setTyping(false);
-    }, 600 + Math.random() * 400);
+    }, 800);
   }
 
   function handleOptionClick(action: string, label: string) {
@@ -338,14 +345,14 @@ export default function ChatBot() {
       setMessages([
         {
           ...WELCOME_MESSAGE,
-          id: Date.now(),
+          id: messageIdCounter++,
           text: "Claro! Como posso ajudar? 😊",
         },
       ]);
       return;
     }
 
-    const userMsg: Message = { id: Date.now(), from: "user", text: label };
+    const userMsg: Message = { id: messageIdCounter++, from: "user", text: label };
     setMessages((prev) => [...prev, userMsg]);
     addBotMessage(action);
   }
@@ -354,7 +361,7 @@ export default function ChatBot() {
     const text = input.trim();
     if (!text) return;
 
-    const userMsg: Message = { id: Date.now(), from: "user", text };
+    const userMsg: Message = { id: messageIdCounter++, from: "user", text };
     setMessages((prev) => [...prev, userMsg]);
     setInput("");
 
@@ -372,6 +379,8 @@ export default function ChatBot() {
   function handleReset() {
     setMessages([WELCOME_MESSAGE]);
   }
+
+  if (!mounted) return null;
 
   return (
     <>
